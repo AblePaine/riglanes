@@ -6,3 +6,8 @@ data/build_data.py
 data/parts.json
 .gitignore
 .vercelignore
+data/build_power_software.py
+data/power.json
+data/software.json
+data/release_state.json
+scripts/
