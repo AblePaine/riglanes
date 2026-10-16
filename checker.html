@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigLanes · Build checker</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="submit.html">Submit build</a></nav><main>
+<h1>Build checker</h1><div class=card style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<label>Motherboard<br><select id=mb></select></label><label>PSU<br><select id=psu></select></label>
+<label>GPU model<br><select id=gpu></select></label><label>GPU count<br><input id=n type=number min=1 max=8 value=4></label>
+<label>CPU + rest of system (W, your estimate)<br><input id=sys type=number value=400></label><label>Per-GPU power limit (W, blank = TDP)<br><input id=pl type=number placeholder="e.g. 280"></label></div>
+<div class=card id=out></div><p class=muted>Assumptions: PSU efficiency 90% for wall draw; continuous circuit load limit = 80% of 15A×120V = 1440 W. Lane check places GPUs in the widest slots first; riser/switch topologies not modeled yet. Transient spikes not modeled.</p></main>
+<script src=data/parts.js></script><script>
+const $=id=>document.getElementById(id),by=c=>PARTS.filter(p=>p.category==c);
+[['mb','motherboard'],['psu','psu'],['gpu','gpu']].forEach(([i,c])=>$(i).innerHTML=by(c).map(p=>'<option value='+p.id+'>'+p.manufacturer+' '+p.name+'</option>').join(''));
+function run(){const mb=PARTS.find(p=>p.id==$('mb').value),psu=PARTS.find(p=>p.id==$('psu').value),g=PARTS.find(p=>p.id==$('gpu').value),n=+$('n').value;
+ const o=[],cls=(c,t)=>o.push('<p class="'+c+'">'+t+'</p>');
+ const slots=[...mb.slots].sort((a,b)=>b.lanes-a.lanes||b.gen-a.gen);
+ cls('','<b>Lanes</b>');
+ for(let i=0;i<n;i++){const s=slots[i];if(!s)cls('bad','GPU '+(i+1)+': no slot available. Needs bifurcation riser, MCIO/SlimSAS adapter or PCIe switch.');
+  else cls(s.lanes>=16?'ok':s.lanes>=8?'warn':'bad','GPU '+(i+1)+' → '+s.label+': Gen'+s.gen+' x'+s.lanes+(s.lanes>=16?'':s.lanes>=8?' (OK for inference; some tensor-parallel all-reduce penalty)':' (lane shortfall: x4 or less)'));}
+ const per=(+$('pl').value||g.tdp_w);if(!per){$('out').innerHTML='<p class=warn>'+g.name+' has no verified TDP. Enter a per-GPU power limit.</p>';return;}const gw=per*n,dc=gw+ +$('sys').value,head=psu.wattage-dc,wall=dc/0.9,amps=wall/120;
+ cls('','<b>Power</b>');cls(head<0?'bad':head<psu.wattage*0.2?'warn':'ok','DC load ≈ '+dc+' W ('+gw+' W GPUs) on '+psu.wattage+' W PSU → headroom '+head+' W ('+Math.round(head/psu.wattage*100)+'%)');
+ cls(psu.input_voltage?'muted':'warn','PSU input: '+(psu.input_voltage||'unverified. Confirm 120V support and 120V wattage rating before relying on this.'));
+ cls(wall>1800?'bad':wall>1440?'warn':'ok','Wall draw ≈ '+Math.round(wall)+' W ≈ '+amps.toFixed(1)+' A @120V. 15A circuit: '+(wall>1800?'over breaker rating':wall>1440?'over 80% continuous limit (12 A)':'within 80% continuous limit'));
+ cls('muted','PSU GPU connectors: '+(psu.pcie_8pin??'?')+'× 8-pin, '+(psu.pcie_12v_2x6??'?')+'× 12V-2x6. Check these against what your card needs.');
+ $('out').innerHTML=o.join('');}
+document.querySelectorAll('select,input').forEach(e=>e.oninput=run);$('mb').value='huananzhi-h12d-8d';$('psu').value='corsair-ax1600i';run();</script></body></html>

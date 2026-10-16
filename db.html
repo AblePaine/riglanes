@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigLanes · Database</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="submit.html">Submit build</a></nav><main>
+<h1>Parts database</h1><div class=card><input id=q placeholder="Search name, maker, platform…" style="width:320px">
+<select id=cat><option value="">All categories</option><option>motherboard</option><option>psu</option><option>riser</option><option>switch</option><option>case</option><option>gpu</option></select>
+<select id=plat><option value="">Any platform</option><option>EPYC</option><option>Threadripper</option><option>AM5</option></select>
+<label>Min GPU slots (≥x8) <input id=minslots type=number min=0 max=8 value=0 style="width:60px"></label> <span id=count class=muted></span></div>
+<table><thead><tr><th>Part</th><th>Category</th><th>Key specs</th><th>Source</th></tr></thead><tbody id=rows></tbody></table>
+<p class=muted>Affiliate links: slots exist in data (affiliate_url) but are intentionally empty.</p></main>
+<script src=data/parts.js></script><script>
+const $=id=>document.getElementById(id);
+function specs(p){const t=x=>x===''||x==null?'<span class=muted>—</span>':x;
+ if(p.category=='motherboard')return `<b>${p.platform}</b> · ${t(p.form_factor)}<br>${p.gpu_slot_count} slots ≥x8 · ${p.cpu_lanes_to_slots} lanes to slots<br>${p.slots.map(s=>'<span class=tag>G'+s.gen+' x'+s.lanes+' · '+s.label+'</span>').join('')}<br>Bifurcation: ${t(p.bifurcation)}<br><span class=muted>${p.notes}</span>`;
+ if(p.category=='psu')return `${p.wattage} W · input ${t(p.input_voltage)}<br>PCIe 8-pin: ${t(p.pcie_8pin)} · 12V-2x6: ${t(p.pcie_12v_2x6)}<br><span class=muted>${p.notes}</span>`;
+ if(p.category=='gpu')return `${p.tdp_w} W TDP · ${p.vram_gb} GB · conn ${t(p.power_connector)}`;
+ return Object.entries(p).filter(([k])=>!['id','category','name','manufacturer','source_url','verification','affiliate_url'].includes(k)).map(([k,v])=>k+': '+t(v)).join('<br>');}
+function draw(){const q=$('q').value.toLowerCase(),c=$('cat').value,pl=$('plat').value,m=+$('minslots').value;
+ const r=PARTS.filter(p=>(!c||p.category==c)&&(!q||JSON.stringify(p).toLowerCase().includes(q))&&(!pl||(p.platform||'').includes(pl))&&(!m||(p.gpu_slot_count||0)>=m));
+ $('count').textContent=r.length+' of '+PARTS.length+' parts';
+ $('rows').innerHTML=r.map(p=>`<tr><td><b>${p.name}</b><br><span class=muted>${p.manufacturer}</span></td><td>${p.category}</td><td>${specs(p)}</td><td><a href="${p.source_url}" target=_blank>source</a><br><span class=muted>${p.verification}</span></td></tr>`).join('');}
+['q','cat','plat','minslots'].forEach(i=>$(i).oninput=draw);draw();</script></body></html>

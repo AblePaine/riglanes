@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigLanes</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="submit.html">Submit build</a></nav><main>
+<section class=hero><h1>Every PCIe lane, accounted for.</h1><p>RigLanes is a parts compatibility database for 2–8 GPU local AI inference rigs. Real per-slot lane layouts, bifurcation support, PSU connectors and 120V circuit math, every spec linked to its source.</p></section>
+<div class=grid><div class=card><h3>Lane-accurate boards</h3><p class=muted>EPYC, Threadripper and AM5 boards with per-slot PCIe gen and electrical width, not just "7 slots".</p></div>
+<div class=card><h3>Build checker</h3><p class=muted>Pick a board, GPU model/count and PSU. We flag lane shortfalls, wattage headroom and 15A/120V circuit load.</p></div>
+<div class=card><h3>Sourced or blank</h3><p class=muted>Every part links to its spec source. If we couldn't verify it, the field stays blank.</p></div></div>
+<div class=card><h3>Get the newsletter</h3><p class=muted>New boards, riser tests and community builds. <span class=todo>TODO: not wired to any provider; posts nowhere</span></p>
+<form onsubmit="event.preventDefault();this.querySelector('p').hidden=false"><input type=email required placeholder="you@example.com" style="width:300px"> <button>Subscribe</button><p hidden class=warn>Placeholder: nothing was sent.</p></form></div>
+<p class=muted>Inspired by community demand: r/LocalLLaMA threads on H12D-8D 4x3090, AM5 4x3090 and EPYC 9575F 4-GPU builds, plus the cpompa.com 3090 inference guide.</p>
+</main></body></html>

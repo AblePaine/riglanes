@@ -1,0 +1,5 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigLanes · Submit</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="submit.html">Submit build</a></nav><main>
+<h1>Submit your build <span class=todo>TODO: placeholder, submits nowhere</span></h1>
+<form class=card onsubmit="event.preventDefault();document.getElementById('m').hidden=false" style="display:grid;gap:10px;max-width:600px">
+<input placeholder="Build name" required><input placeholder="Motherboard"><input placeholder="CPU"><input placeholder="GPUs (model × count)"><input placeholder="PSU(s)"><input placeholder="Risers / switches / frame">
+<textarea rows=4 placeholder="Lane layout, power limits, tokens/s, issues…"></textarea><input placeholder="Link to photos or thread"><button>Submit</button><p id=m hidden class=warn>Placeholder: nothing was sent.</p></form></main></body></html>
