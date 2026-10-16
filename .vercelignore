@@ -1,0 +1,8 @@
+# Kept in the repo, not served by the live site
+HANDOFF.md
+CONTRIBUTING-AGENTS.md
+README.md
+data/build_data.py
+data/parts.json
+.gitignore
+.vercelignore

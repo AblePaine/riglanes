@@ -26,6 +26,8 @@ No npm, no framework, no build step. The pages load `style.css` and `data/parts.
 - The repo is linked to Vercel (project `riglanes`, scope `able-paine`): pushing to `main` deploys it. After each push, confirm https://riglanes.vercel.app returns 200 on every page and shows the right part count.
 - Never buy domains, upgrade plans, or turn on paid features without the owner saying yes.
 
+- **Not served:** `.vercelignore` keeps HANDOFF.md, CONTRIBUTING-AGENTS.md, README.md, data/build_data.py, data/parts.json and .gitignore out of the Vercel deployment, so they 404 on the live site but stay in the repo. Add any new repo-only file there. Never list the pages, `style.css` or `data/parts.js`.
+
 ## Hard rules
 - Ask the owner (a yes/no with a recommendation) before you spend money, email or message anyone new, delete anything, or create or connect an account.
 - Never commit secrets, tokens, API keys or private IDs.
