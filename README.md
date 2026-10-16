@@ -1,5 +1,7 @@
 # RigLanes
 
+**Taking over this project? Read [HANDOFF.md](HANDOFF.md) and [CONTRIBUTING-AGENTS.md](CONTRIBUTING-AGENTS.md).**
+
 Parts compatibility database for 2–8 GPU local AI inference rigs. Plain static site (no build step).
 
 - `index.html` – pitch + newsletter form (TODO placeholder, posts nowhere)
@@ -13,3 +15,5 @@ Parts compatibility database for 2–8 GPU local AI inference rigs. Plain static
 Run locally: `python3 -m http.server 8765` then open http://localhost:8765
 
 Affiliate link fields (`affiliate_url`) are intentionally empty.
+
+Deploy: see HANDOFF.md section 2 (repo not yet linked to Vercel; live site is a manual upload).
