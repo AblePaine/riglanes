@@ -40,7 +40,7 @@ Re-verify these before quoting them publicly; they reflect the original research
 | Live site | https://riglanes.vercel.app (alias: https://riglanes-able-paine.vercel.app) |
 | Vercel | Project `riglanes` in the team/scope `able-paine`, free Hobby plan, no custom domain. Deployment protection is off (public). |
 | GitHub | https://github.com/AblePaine/riglanes (public, branch `main`) |
-| Deploy method | **Manual direct upload** through the Vercel API/MCP (`create_deployment`). The live deployment uses a single-file build of each page with the CSS copied inline. **The repo is NOT yet connected to Vercel**, so pushes do not auto-deploy. Linking failed with a 403 ("Not authorized ... scope able-paine") even after the owner reconnected Vercel. Fix: Vercel dashboard → riglanes → Settings → Git → connect `AblePaine/riglanes`, production branch `main`, Framework "Other", no build command, output = repo root. |
+| Deploy method | **Git auto-deploy.** Vercel project `riglanes` is linked to `AblePaine/riglanes`, production branch `main`, framework Other, no build command, served from repo root. Every push to `main` builds and goes live on riglanes.vercel.app (also riglanes-git-main-able-paine.vercel.app). First git deploy: commit 265fab6 on 2026-10-16. |
 | Parts | 47 in total: 19 motherboards, 9 GPUs, 8 PSUs, 6 risers, 2 PCIe switches, 3 cases. |
 | Verification | 46 were checked on the maker's own product or spec page on 2026-10-16. 1 (Super Flower Leadex Platinum 2000W) used a third-party review because the maker page was unavailable. |
 
@@ -98,11 +98,10 @@ Fields by category:
 - **The checker doesn't model** risers or switches (lane fan-out, signal-integrity limits), transient power spikes, per-GPU connector counts against PSU connectors, multi-PSU setups, or slot power.
 - **The newsletter and submit forms send nothing.** They are TODO placeholders.
 - **No affiliate IDs,** no sponsors, **no domain**.
-- **The repo isn't linked to Vercel** (see section 2).
 
 ## 5. Prioritized roadmap
 
-1. **Connect the repo to Vercel** so pushes auto-deploy (dashboard step above, or the MCP once scope access works).
+1. ~~Connect the repo to Vercel~~ (done 2026-10-16).
 2. **Wire up the forms** with a free provider (Buttondown free tier for the newsletter; a Vercel function plus free storage, or a GitHub-issue form, for submissions). **Ask the owner before creating any new account.**
 3. **Grow to 100+ parts,** same verification rule. Priorities: open frames, more risers and MCIO/OCuLink adapters, 2000W+ and 240V PSUs, used-market boards (H12SSL, ROMED8-2T, MZ32).
 4. **Affiliate sign-ups** (Amazon, Newegg and others). These need the owner, since they involve the owner's identity and tax info.

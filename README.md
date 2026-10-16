@@ -16,4 +16,4 @@ Run locally: `python3 -m http.server 8765` then open http://localhost:8765
 
 Affiliate link fields (`affiliate_url`) are intentionally empty.
 
-Deploy: see HANDOFF.md section 2 (repo not yet linked to Vercel; live site is a manual upload).
+Deploy: pushes to `main` auto-deploy to https://riglanes.vercel.app (Vercel project `riglanes`, Git-linked). See HANDOFF.md section 2.

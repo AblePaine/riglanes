@@ -23,8 +23,7 @@ No npm, no framework, no build step. The pages load `style.css` and `data/parts.
 - If you change the checker logic, describe the new assumptions in HANDOFF.md section 4.
 
 ## Deploying
-- Once the repo is linked to Vercel (project `riglanes`, scope `able-paine`), pushing to `main` deploys it.
-- Until then, a deploy is a manual Vercel upload. Confirm https://riglanes.vercel.app returns 200 on every page and shows the right part count.
+- The repo is linked to Vercel (project `riglanes`, scope `able-paine`): pushing to `main` deploys it. After each push, confirm https://riglanes.vercel.app returns 200 on every page and shows the right part count.
 - Never buy domains, upgrade plans, or turn on paid features without the owner saying yes.
 
 ## Hard rules
