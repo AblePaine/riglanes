@@ -7,6 +7,8 @@ Parts compatibility database for 2–8 GPU local AI inference rigs. Plain static
 - `index.html` – pitch + newsletter form (TODO placeholder, posts nowhere)
 - `db.html` – searchable/filterable parts database
 - `checker.html` – build checker (lanes, PSU headroom, 15A/120V circuit load)
+- `power.html` – RigWatts: measured multi-GPU power + circuit/cost planner (`data/power.json`)
+- `software.html` – WorksOn: multi-GPU engine compatibility (`data/software.json`)
 - `submit.html` – submit-your-build form (TODO placeholder)
 - `data/parts.json` – parts with per-part `source_url` and `verification`; unverified specs are blank
 - `data/parts.js` – same data as `window.PARTS` for the pages

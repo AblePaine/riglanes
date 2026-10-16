@@ -51,6 +51,19 @@ The site is plain static HTML with no framework and no build step:
 - `submit.html`: the build submission form (placeholder)
 - `style.css`, plus the data files in `data/`
 
+## 2b. RigWatts and WorksOn (added 2026-10-16 on branch `power-software`)
+
+- **RigWatts** (`power.html`, `data/power.json`): measured power for real multi-GPU builds, plus a planner.
+  - The planner covers circuits of 15A/20A at 120V, 240V, and 16A at 230V, with 80% continuous-load headroom, an optional peak/transient check, and monthly cost.
+  - Default rate: the EIA US average residential price for July 2026, 18.31¢/kWh, from Electric Power Monthly Table 5.6.A. Update it when EIA publishes newer data.
+  - The build checker links its wall-draw estimate into the planner (`power.html?w=`).
+  - 4 entries so far: 2 measured at the wall, 1 GPU-only, 1 author estimate. Each is labelled in the `measurement` field.
+- **WorksOn** (`software.html`, `data/software.json`): rows of card × engine version × backend → works yes/partial/no, plus TP/P2P/NVLink notes, flags/patches, a source URL and a date. 15 entries so far.
+- `data/build_power_software.py` regenerates both datasets. It keeps any `needs_retest` flags already set.
+- `scripts/watch_releases.py` is a **stub**. It checks the latest GitHub releases of vLLM, llama.cpp and SGLang. When a release differs from what's in `data/release_state.json`, it marks rows for that engine `needs_retest`. It isn't scheduled yet: running it on a GitHub Action needs the owner's OK.
+- Both submit forms are placeholders marked TODO. They send nothing.
+- **Sources that couldn't be opened:** Reddit blocked every fetch (www, old. and .json all returned 403 or a login wall). That covers r/LocalLLaMA 1o528nk (idle power), 1g54h9l (Supermicro 4x3090), 1jsyv56 (Threadripper 8x3090), and r/ROCm 1uaedpw (R9700 on vLLM 0.22.1). None of their numbers are in the data, even where search snippets showed some. Retry them from a logged-in browser, with the owner's OK, or ask the authors.
+
 ## 3. Data schema and how to add or verify parts
 
 **The rule:** only specs confirmed on the maker's page or datasheet. If a spec is unverified, leave it **blank** (`""` / `null`). Never guess. Every part has a `source_url`.
@@ -89,6 +102,13 @@ Fields by category:
 
 ## 4. Known gaps
 
+- **RigWatts/WorksOn:**
+  - Small datasets (4 power rows, 15 software rows), and no SGLang entries yet.
+  - Reddit sources are unreachable without a login.
+  - Only 2 power rows are true wall readings.
+  - The planner ignores PSU efficiency curves and other loads on the circuit.
+  - The release watcher is an unscheduled stub.
+
 - **ASRock Rack ROMED8-2T:** the maker page doesn't show per-slot lane sharing with OCuLink and M.2. Needs the manual.
 - **Supermicro H12SSL-i / H12SSL-NT / H13SSL-N:** physical slot order isn't on the product pages. Needs the manuals.
 - **Blank bifurcation fields:** most boards. The ASUS WRX90E and TRX50 pages point to an ASUS FAQ that wasn't fetched.
@@ -109,7 +129,8 @@ Fields by category:
 6. **A build-report pipeline:** submissions → review → published build pages with measured tokens/s and power.
 7. **Sponsor outreach.** The owner must approve every new contact and every deal.
 8. **A domain purchase** (for example riglanes.com). Needs owner approval, since it costs money.
-9. **The TokPerDollar page,** using benchmark data from build reports.
+9. **Grow RigWatts/WorksOn:** wall-meter submissions, SGLang rows, and retesting rows that the watcher flags.
+10. **The TokPerDollar page,** using benchmark data from build reports.
 
 ## 6. Operating principles
 
