@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigLanes · RigWatts</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="power.html">Power</a><a href="software.html">Software</a><a href="submit.html">Submit build</a></nav><main>
+<h1>RigWatts: measured power for multi-GPU rigs</h1>
+<p class=muted>Every row comes from a source we opened. Blank = the source didn't say. Check the "measured at" column: wall readings, GPU-only readings and estimates are not the same thing.</p>
+<div class=card><table><thead><tr><th>Build</th><th>GPUs</th><th>Platform</th><th>Power limit</th><th>Engine</th><th>Idle W</th><th>Inference W</th><th>Peak W</th><th>Measured at</th><th>Source</th></tr></thead><tbody id=rows></tbody></table></div>
+<h2>Planner</h2>
+<div class=card style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+<label>Inference wall draw (W)<br><input id=w type=number value=800></label>
+<label>Idle wall draw (W)<br><input id=idle type=number value=170></label>
+<label>Inference hours per day<br><input id=hrs type=number min=0 max=24 value=8></label>
+<label>Circuit<br><select id=circ><option value="15,120">15 A @ 120 V</option><option value="20,120">20 A @ 120 V</option><option value="15,240">15 A @ 240 V</option><option value="20,240">20 A @ 240 V</option><option value="16,230">16 A @ 230 V (EU)</option></select></label>
+<label>Electricity price ($/kWh)<br><input id=rate type=number step=0.001></label>
+<label>Peak / transient wall draw (W, optional)<br><input id=peak type=number placeholder="e.g. 1650"></label></div>
+<p class=muted id=ratenote></p>
+<div class=card id=out></div>
+<p class=muted>Continuous-load rule: plan for at most 80% of the breaker rating for loads that run 3+ hours (US NEC practice). Monthly cost uses 30.4 days. Starting values match the HYDRA row; the build checker can pre-fill this from your build.</p>
+<h2>Submit a measurement <span class=todo>TODO: not wired up</span></h2>
+<div class=card><p class=warn>This form sends nothing yet.</p><form onsubmit="event.preventDefault();alert('TODO: submissions are not wired up yet. Nothing was sent.')">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"><input placeholder="GPUs and count"><input placeholder="Platform / board"><input placeholder="Power limit (W)"><input placeholder="Engine + version"><input placeholder="Idle W at wall"><input placeholder="Inference W at wall"><input placeholder="How measured (meter model)"><input placeholder="Link to post / photo"><input placeholder="Date"></div><p><button>Submit (TODO)</button></p></form></div>
+</main><script src=data/power.js></script><script>
+const $=id=>document.getElementById(id),v=x=>x==null?'':x;
+$('rows').innerHTML=POWER.map(p=>'<tr><td>'+p.name+'</td><td>'+p.gpu_count+'× '+p.gpus+'</td><td>'+p.platform+'</td><td>'+v(p.power_limit_w)+'</td><td>'+p.engine+'</td><td>'+v(p.idle_w)+'</td><td>'+v(p.inference_w)+'</td><td>'+v(p.peak_w)+'</td><td class='+(p.measured&&p.measurement.startsWith('wall')?'ok':'warn')+'>'+p.measurement+'</td><td><a href="'+p.source_url+'">source</a>'+(p.source_date?' ('+p.source_date+')':'')+'<div class=muted>'+p.notes+'</div></td></tr>').join('');
+// EIA Electric Power Monthly Table 5.6.A, U.S. Total residential, July 2026 = 18.31 cents/kWh (released 2026-09-24, fetched 2026-10-16)
+const EIA=0.1831;$('rate').value=EIA;$('ratenote').innerHTML='Default rate: US average residential price, July 2026, 18.31¢/kWh (<a href="https://www.eia.gov/electricity/monthly/epm_table_grapher.php?t=epmt_5_6_a">EIA Electric Power Monthly, Table 5.6.A</a>). Use your own bill\'s rate if you know it.';
+const q=new URLSearchParams(location.search);['w','idle','hrs','peak'].forEach(k=>{if(q.get(k))$(k).value=q.get(k)});
+function run(){const w=+$('w').value,idle=+$('idle').value,h=Math.min(24,Math.max(0,+$('hrs').value)),[A,V]=$('circ').value.split(',').map(Number),rate=+$('rate').value,peak=+$('peak').value;
+ const cap=A*V,cont=cap*0.8,o=[],c=(k,t)=>o.push('<p class="'+k+'">'+t+'</p>');
+ c(w>cap?'bad':w>cont?'warn':'ok','Inference draw '+w+' W = '+(w/V).toFixed(1)+' A on a '+A+' A/'+V+' V circuit. Continuous limit '+cont+' W → headroom '+Math.round(cont-w)+' W ('+Math.round((cont-w)/cont*100)+'%).');
+ if(peak)c(peak>cap?'bad':peak>cont?'warn':'ok','Peak '+peak+' W = '+(peak/V).toFixed(1)+' A ('+(peak>cap?'over the breaker rating; expect trips':peak>cont?'over the 80% line; short spikes may be OK, sustained load is not':'within the 80% line')+').');
+ c('muted','Other loads on the same circuit count too (monitor, router, space heater…).');
+ const kwh=(w*h+idle*(24-h))/1000*30.4;
+ if(rate>0)c('','<b>Monthly energy ≈ '+kwh.toFixed(0)+' kWh → ≈ $'+(kwh*rate).toFixed(2)+'/month</b> at $'+rate+'/kWh ('+h+' h inference + '+(24-h)+' h idle per day). Idle alone: $'+(idle*24/1000*30.4*rate).toFixed(2)+'/month if it never ran.');
+ else c('warn','Enter a $/kWh rate to see monthly cost.');
+ $('out').innerHTML=o.join('');}
+document.querySelectorAll('input,select').forEach(e=>e.oninput=run);run();</script></body></html>
