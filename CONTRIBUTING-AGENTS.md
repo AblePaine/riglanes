@@ -47,3 +47,9 @@ No npm, no framework, no build step. The pages load `style.css` and `data/parts.
 - Never invent specs. A blank field is correct when the specs are unverified.
 - Leave `affiliate_url` empty until the owner sets up affiliate accounts.
 - Update HANDOFF.md (state, gaps, roadmap) at the end of every work session.
+
+## RigBench rules
+- Add parts only with a real source URL you opened; link, never re-host files; record license or "not captured".
+- Uploader temps go in `uploader_claim` with `claim_source`; never in `measured`.
+- `measured` is filled only from a `results/*.json` produced by `scripts/rigbench_test.py` on the owner's hardware.
+- Work on branch `rigbench`; never push to main without owner yes.

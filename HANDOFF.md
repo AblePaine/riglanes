@@ -139,3 +139,10 @@ Fields by category:
 - Never invent specs. Blank beats wrong.
 - No secrets in the repo.
 - Talk like a friend texting: short, plain and direct.
+
+## RigBench (branch `rigbench`, added 2026-10-20, NOT merged / NOT live)
+- Page: `rigbench.html`; data: `data/rigbench_parts.json` (11 cataloged parts, links only), `data/rigbench_queue.json` (test queue, all blocked until owner confirms which GPUs they own).
+- Script: `scripts/rigbench_test.py` sets a power limit (root), runs a user-supplied load command for 30 min, logs nvidia-smi/rocm-smi to `results/*.json`, restores the default limit (NVIDIA only; AMD restore is manual).
+- Rules: never re-host STLs; uploader claims labeled "uploader claim"; measured fields stay "not yet tested" until a real run file exists in `results/`.
+- Gaps: licenses not captured for most models (Printables blocked our fetcher behind Cloudflare). Verify by hand before featuring. rocm-smi JSON is logged raw (not parsed).
+- Merging to main = going live on Vercel: owner approval required.

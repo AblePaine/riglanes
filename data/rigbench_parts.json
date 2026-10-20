@@ -1,0 +1,237 @@
+{
+ "generated": "2026-10-20",
+ "rules": "Link only, never re-host STLs. Uploader claims are not RigBench measurements.",
+ "parts": [
+  {
+   "id": "pr-1739740",
+   "name": "RTX Pro 6000 Blackwell Server Edition dual-card 80mm fan duct",
+   "type": "fan duct",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1739740-nvidia-rtx-pro-6000-blackwell-server-edition-dual",
+   "author": "Marek",
+   "license": "Public Domain (shown on the original model this one remixes, per search snippet)",
+   "uploader_claim": "Under 80\u00b0C at full load at 2x600W TDP, fan at 80% duty, ambient ~23\u00b0C, ARCTIC S8038-10K",
+   "claim_source": "model page text (search snippet)",
+   "notes": "PETG, no supports, stackable 4/6/8 cards",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1421067",
+   "name": "AMD Instinct MI50 shroud",
+   "type": "blower shroud",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1421067-amd-instinct-mi50-shroud",
+   "author": "Bit Matter",
+   "license": "not captured; check source page",
+   "uploader_claim": "Three cards, well below 85\u00b0C at max load with PWM 65%",
+   "claim_source": "model page (opened 2026-10-20)",
+   "notes": "Needs BASA0725R2U blower fan + M2 screws; stays 2-slot",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1229329",
+   "name": "Shroud for AMD Instinct MI50 + BA10033B12H blower",
+   "type": "blower shroud",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1229329-shroud-for-amd-instinct-mi50-workstation-gpu-and-b",
+   "author": "HermannSW",
+   "license": "not captured; check source page",
+   "uploader_claim": "88\u201389\u00b0C at 242\u2013248W",
+   "claim_source": "search summary only; page blocked by Cloudflare, not verified",
+   "notes": "",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-816475",
+   "name": "Tesla P40 fan shroud for dual 4020mm fans",
+   "type": "fan shroud",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/816475-nvidia-tesla-p40-fan-shroud-for-dual-4020mm-fans",
+   "author": "keerekeerweere",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "Sunon 40x40x20 fans; shorter-depth version exists (search snippet). Page blocked by Cloudflare.",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1165213",
+   "name": "Tesla P40 fan shroud for dual 5015 fan",
+   "type": "fan shroud",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1165213-tesla-p40-fan-shroud-for-dual-5015-fan",
+   "author": "keerekeerweere",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "Remix of pr-816475; Sunon 50151VX-8000-G99; PETG; author calls it a first prototype",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1161597",
+   "name": "Tesla P40 radial fan shroud (flipped for clearance)",
+   "type": "fan shroud",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1161597-nvidia-tesla-p40-radial-fan-shroud-flipped-for-cle",
+   "author": "neophrema",
+   "license": "not captured; check source page",
+   "uploader_claim": "69\u00b0C after two hours at full fan speed",
+   "claim_source": "search summary only; page blocked by Cloudflare, not verified",
+   "notes": "",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1217305",
+   "name": "PCIe/GPU x1 riser mining rig extender platform",
+   "type": "riser bracket",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1217305-pciegpu-x1-riser-mining-rig-extender-platform",
+   "author": "sonogrambindweeds",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "Mixes x1 and ribbon risers on a mining frame; for AI rigs",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-788070",
+   "name": "GPU 1x to 16x bracket for mining rig",
+   "type": "riser bracket",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/788070-gpu-1x-to-16x-bracket-for-mining-rig",
+   "author": "Johnathan Lee",
+   "license": "Author's original creation (license name not captured)",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "Holds 3 riser adapters",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-178454",
+   "name": "Mining Rig Fan Extender Bracket",
+   "type": "fan wall",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/178454-mining-rig-fan-extender-bracket",
+   "author": "breb6927",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "For 13in+ GPUs; PLA 17 g, 0.2 mm",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-1273381",
+   "name": "3D printable open frame PC case",
+   "type": "frame",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/1273381-3d-printable-open-frame-pc-case",
+   "author": "Corsair",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "Pegboard-based, GPU brackets (search summary)",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  },
+  {
+   "id": "pr-80191",
+   "name": "Open PC Frame II (OPF-II)",
+   "type": "frame",
+   "site": "Printables",
+   "source_url": "https://www.printables.com/model/80191-open-pc-frame-ii-opf-ii",
+   "author": "Empiricus",
+   "license": "not captured; check source page",
+   "uploader_claim": null,
+   "claim_source": null,
+   "notes": "ATX open frame, not multi-GPU focused (search summary)",
+   "checked": "2026-10-20",
+   "measured": {
+    "status": "not yet tested",
+    "delta_t_c": null,
+    "max_temp_c": null,
+    "fan_pct": null,
+    "noise_dba": null,
+    "fit": null
+   }
+  }
+ ]
+}

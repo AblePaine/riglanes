@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset=utf-8><title>RigBench · RigLanes</title><link rel=stylesheet href=style.css></head><body><nav><b>RigLanes</b><a href="index.html">Home</a><a href="db.html">Database</a><a href="checker.html">Build checker</a><a href="power.html">Power</a><a href="software.html">Software</a><a href="rigbench.html">RigBench</a><a href="submit.html">Submit build</a></nav><main>
+<section class=hero><h1>RigBench</h1><p>Printable GPU shrouds, ducts, riser brackets and fan walls, measured on real multi-GPU rigs with one protocol. We link to the original designer; we never re-host files.</p></section>
+<div class=card><span class=todo>No parts tested yet. Every measured column says "not yet tested" until a RigBench run is logged.</span></div>
+<p><select id=f><option value="">All types</option></select> <input id=q placeholder="Search name / GPU"></p>
+<table id=t><thead><tr><th>Part</th><th>Type</th><th>Uploader claim</th><th>Measured (RigBench)</th><th>License</th><th>Source</th></tr></thead><tbody></tbody></table>
+<div class=card id=protocol><h3>Standard test protocol (v0.1)</h3><ol>
+<li>Print in PETG unless the designer says otherwise; record filament brand, layer height, walls, infill.</li>
+<li>Fit check: mounts without force? clears neighbor slot? record pass/fail + notes/photo.</li>
+<li>Room ambient measured at the intake, 20–26°C; record it.</li>
+<li>Fixed power limit (same watts for every part on the same GPU model); fixed fan duty if controllable, else record.</li>
+<li>Load for 30 min with the same load command (<code>scripts/rigbench_test.py</code>), samples every 5 s.</li>
+<li>Report max temp, last-5-min average, ΔT over ambient, fan %, noise dBA at 1 m (phone meter, labeled approximate).</li>
+<li>Compare only within the same GPU model and power limit.</li></ol></div>
+<p class=muted>Uploader claims are copied from the model page and are not verified. Some pages blocked our fetcher; those claims are marked as coming from a search summary.</p>
+<script>
+fetch('data/rigbench_parts.json').then(r=>r.json()).then(d=>{const P=d.parts,f=document.getElementById('f'),q=document.getElementById('q'),tb=document.querySelector('#t tbody');
+[...new Set(P.map(p=>p.type))].forEach(t=>f.add(new Option(t,t)));
+const draw=()=>{tb.innerHTML='';P.filter(p=>(!f.value||p.type==f.value)&&(p.name+p.notes).toLowerCase().includes(q.value.toLowerCase())).forEach(p=>{tb.insertAdjacentHTML('beforeend',`<tr><td><b>${p.name}</b><br><span class=muted>${p.author} · ${p.notes}</span></td><td>${p.type}</td><td>${p.uploader_claim?`<span class=warn>uploader claim:</span> ${p.uploader_claim}<br><span class=muted>${p.claim_source}</span>`:'<span class=muted>none</span>'}</td><td class=muted>${p.measured.status}</td><td class=muted>${p.license}</td><td><a href="${p.source_url}">${p.site}</a><br><span class=muted>checked ${p.checked}</span></td></tr>`)})};
+f.onchange=q.oninput=draw;draw()})
+</script></main></body></html>

@@ -1,0 +1,30 @@
+{
+ "generated": "2026-10-20",
+ "queue": [
+  {
+   "part_id": "pr-1421067",
+   "status": "blocked: owner must confirm they own this GPU model",
+   "gpu_required": "AMD Instinct MI50"
+  },
+  {
+   "part_id": "pr-816475",
+   "status": "blocked: owner must confirm they own this GPU model",
+   "gpu_required": "Tesla P40"
+  },
+  {
+   "part_id": "pr-1739740",
+   "status": "blocked: owner must confirm they own this GPU model",
+   "gpu_required": "RTX Pro 6000 Server Edition"
+  },
+  {
+   "part_id": "pr-1217305",
+   "status": "blocked: owner must confirm they own this GPU model",
+   "gpu_required": "any, mining frame"
+  },
+  {
+   "part_id": "pr-178454",
+   "status": "blocked: owner must confirm they own this GPU model",
+   "gpu_required": "any long GPU"
+  }
+ ]
+}
